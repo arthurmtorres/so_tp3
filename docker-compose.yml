@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  tp3-app:
+    build: .
+    image: bcc264-tp3:latest
+    container_name: bcc264_tp3_app
+    ports:
+      - "8080:8080"   # REST, GraphQL e WebSocket
+      - "50051:50051" # gRPC
+    restart: unless-stopped

@@ -1,0 +1,61 @@
+### =====================================
+### TESTES DA API REST
+### =====================================
+
+### 1. Verificar se o servidor tá de pé
+GET http://localhost:8080/health
+
+### 2. Listar todo o estoque (REST)
+GET http://localhost:8080/items
+
+### 3. Consultar um item específico (REST)
+GET http://localhost:8080/items/monitor
+
+### 4. Realizar uma compra via REST
+POST http://localhost:8080/purchase
+Content-Type: application/json
+
+{
+  "item": "monitor",
+  "quantity": 1,
+  "clientId": "cli-rest-01"
+}
+
+### 5. Cancelar/Devolver via REST
+POST http://localhost:8080/cancel
+Content-Type: application/json
+
+{
+  "item": "monitor",
+  "quantity": 1,
+  "clientId": "cli-rest-01"
+}
+
+
+### =====================================
+### TESTES DA API GRAPHQL
+### =====================================
+
+### 6. Listar itens via GraphQL
+POST http://localhost:8080/graphql
+Content-Type: application/json
+
+{
+  "query": "query { items { name stock } }"
+}
+
+### 7. Consultar item específico via GraphQL
+POST http://localhost:8080/graphql
+Content-Type: application/json
+
+{
+  "query": "query { getItem(name: \"cadeira\") { name stock } }"
+}
+
+### 8. Realizar compra via Mutation do GraphQL
+POST http://localhost:8080/graphql
+Content-Type: application/json
+
+{
+  "query": "mutation { purchase(item: \"cadeira\", quantity: 2, clientId: \"cli-gql-01\") { success remaining } }"
+}
