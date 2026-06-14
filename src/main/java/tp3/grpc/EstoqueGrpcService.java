@@ -48,7 +48,6 @@ public class EstoqueGrpcService extends InventoryServiceGrpc.InventoryServiceImp
 
     @Override
     public void purchase(PurchaseRequest request, StreamObserver<PurchaseReply> responseObserver) {
-        // Passando "gRPC" como origem
         EstoqueService.PurchaseResult result = estoqueService.realizarCompra(
                 request.getItem(), 
                 request.getQuantity(), 
@@ -67,7 +66,6 @@ public class EstoqueGrpcService extends InventoryServiceGrpc.InventoryServiceImp
 
     @Override
     public void cancel(PurchaseRequest request, StreamObserver<PurchaseReply> responseObserver) {
-        // Passando "gRPC" como origem
         EstoqueService.PurchaseResult result = estoqueService.cancelarCompra(
                 request.getItem(), 
                 request.getQuantity(), 

@@ -13,7 +13,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @Component
 public class EstoqueWebSocketHandler extends TextWebSocketHandler {
 
-    // Lista thread-safe para guardar todos os clientes (navegadores/apps) conectados
     private final List<WebSocketSession> sessions = new CopyOnWriteArrayList<>();
 
     @Override
@@ -28,7 +27,6 @@ public class EstoqueWebSocketHandler extends TextWebSocketHandler {
         System.out.println("Cliente WebSocket desconectado: " + session.getId());
     }
 
-    // Método que o nosso EstoqueService vai chamar para avisar todo mundo
     public void notificarTodos(String mensagemJson) {
         for (WebSocketSession session : sessions) {
             if (session.isOpen()) {

@@ -17,7 +17,7 @@ Content-Type: application/json
 
 {
   "item": "monitor",
-  "quantity": 1,
+  "quantity": 2,
   "clientId": "cli-rest-01"
 }
 
@@ -57,5 +57,109 @@ POST http://localhost:8080/graphql
 Content-Type: application/json
 
 {
-  "query": "mutation { purchase(item: \"cadeira\", quantity: 2, clientId: \"cli-gql-01\") { success remaining } }"
+  "query": "mutation { purchase(item: \"monitor\", quantity: 1, clientId: \"cli-gql-01\") { success remaining } }"
 }
+
+### 9. Cancelar compra via Mutation
+POST http://localhost:8080/graphql
+Content-Type: application/json
+
+{
+  "query": "mutation { cancel(item: \"monitor\", quantity: 1, clientId: \"cli-01\") }"
+}
+
+### =====================================
+### TESTES DA API GRPC
+### =====================================
+
+### gRPC: Rota 1 - Listar todos os itens
+GRPC localhost:9090/inventory.InventoryService/ListItems
+
+### gRPC: Rota 2 - Comprar (Exemplo: comprando 1 mesa)
+GRPC localhost:9090/inventory.InventoryService/Purchase
+
+{
+  "item": "mesa",
+  "quantity": 1,
+  "clientId": "cli-01"
+}
+
+### gRPC: Rota 3 - Consultar a quantidade de um item específico
+GRPC localhost:9090/inventory.InventoryService/GetItem
+
+{
+  "id": "monitor"
+}
+
+### gRPC: Rota 4 - Cancelar / Devolver item ao estoque
+GRPC localhost:9090/inventory.InventoryService/Cancel
+
+{
+  "item": "monitor",
+  "quantity": 1,
+  "clientId": "cli-01"
+}
+
+### WebSocket: Conectar para escutar eventos em tempo real
+WEBSOCKET ws://127.0.0.1:8080/ws
+
+
+
+### Caso não funcione rodando direto do VsCode, pode utilizar os comandos abaixo no terminal
+
+
+
+### =====================================
+### REST
+### =====================================
+
+### Listar todos os itens
+curl -s -X GET http://localhost:8080/items
+
+### Consultar item específico
+curl -s -X GET http://localhost:8080/items/monitor
+
+### Comprar item
+curl -s -X POST http://localhost:8080/purchase -H "Content-Type: application/json" -d '{"item": "monitor", "quantity": 1, "clientId": "cli-01"}'
+
+### Cancelar compra
+curl -s -X POST http://localhost:8080/cancel -H "Content-Type: application/json" -d '{"item": "monitor", "quantity": 1, "clientId": "cli-01"}'
+
+### =====================================
+### GRAPHQL
+### =====================================
+
+### Listar todos os itens
+curl -s -X POST http://localhost:8080/graphql -H "Content-Type: application/json" -d '{"query": "query { items { name stock } }"}'
+
+### Consultar item específico
+curl -s -X POST http://localhost:8080/graphql -H "Content-Type: application/json" -d '{"query": "query { item(id: \"monitor\") }"}'
+
+### Comprar item
+curl -s -X POST http://localhost:8080/graphql -H "Content-Type: application/json" -d '{"query": "mutation { purchase(item: \"monitor\", quantity: 1, clientId: \"cli-01\") { success remaining } }"}'
+
+### Cancelar compra
+curl -s -X POST http://localhost:8080/graphql -H "Content-Type: application/json" -d '{"query": "mutation { cancel(item: \"monitor\", quantity: 1, clientId: \"cli-01\") }"}'
+
+### =====================================
+### GRPC
+### =====================================
+
+### Listar todos os itens
+grpcurl -plaintext localhost:9090 inventory.InventoryService/ListItems
+
+### Consultar item específico
+grpcurl -plaintext -d '{"id": "monitor"}' localhost:9090 inventory.InventoryService/GetItem
+
+### Comprar item
+grpcurl -plaintext -d '{"item": "monitor", "quantity": 1, "clientId": "cli-grpc"}' localhost:9090 inventory.InventoryService/Purchase
+
+### Cancelar compra
+grpcurl -plaintext -d '{"item": "monitor", "quantity": 1, "clientId": "cli-grpc"}' localhost:9090 inventory.InventoryService/Cancel
+
+### =====================================
+### WEBSOCKET
+### =====================================
+
+### Conectar para escutar eventos em tempo real
+websocat ws://localhost:8080/ws/estoque

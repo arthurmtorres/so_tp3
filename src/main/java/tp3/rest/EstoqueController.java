@@ -36,13 +36,11 @@ public class EstoqueController {
 
     @PostMapping("/purchase")
     public EstoqueService.PurchaseResult purchase(@RequestBody PurchaseRequest request) {
-        // Passando "REST" como origem
         return estoqueService.realizarCompra(request.item(), request.quantity(), request.clientId(), "REST");
     }
 
     @PostMapping("/cancel")
     public EstoqueService.PurchaseResult cancel(@RequestBody PurchaseRequest request) {
-        // Passando "REST" como origem
         return estoqueService.cancelarCompra(request.item(), request.quantity(), request.clientId(), "REST");
     }
 

@@ -27,7 +27,6 @@ public class EstoqueService {
         return estoque.get(nome.toLowerCase());
     }
 
-    // Recebe a origem para avisar no evento
     public synchronized PurchaseResult realizarCompra(String item, int quantidade, String clientId, String origem) {
         String itemChave = item.toLowerCase();
         
@@ -39,9 +38,12 @@ public class EstoqueService {
         if (estoqueAtual >= quantidade) {
             int novoEstoque = estoqueAtual - quantidade;
             estoque.put(itemChave, novoEstoque);
-            
-            // Dispara a notificação para todos os clientes conectados!
-            dispararEvento("stock_update", itemChave, novoEstoque, origem);
+
+            dispararEvento("compra_realizada", itemChave, novoEstoque, origem);
+
+            if (novoEstoque <= 1) {
+                dispararEvento("estoque_baixo_esgotado", itemChave, novoEstoque, origem);
+            }
             
             return new PurchaseResult(true, novoEstoque);
         }
@@ -59,13 +61,11 @@ public class EstoqueService {
         int novoEstoque = estoque.get(itemChave) + quantidade;
         estoque.put(itemChave, novoEstoque);
 
-        // Dispara a notificação!
         dispararEvento("stock_update", itemChave, novoEstoque, origem);
 
         return new PurchaseResult(true, novoEstoque);
     }
 
-    // Método auxiliar para criar o JSON do evento
     private void dispararEvento(String evento, String item, int estoqueRestante, String origem) {
         String json = String.format("{\"event\": \"%s\", \"item\": \"%s\", \"stock\": %d, \"origin\": \"%s\"}",
                 evento, item, estoqueRestante, origem);

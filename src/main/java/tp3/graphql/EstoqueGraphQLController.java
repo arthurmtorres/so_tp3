@@ -36,13 +36,11 @@ public class EstoqueGraphQLController {
 
     @MutationMapping
     public EstoqueService.PurchaseResult purchase(@Argument String item, @Argument int quantity, @Argument String clientId) {
-        // Passando "GraphQL" como origem
         return estoqueService.realizarCompra(item, quantity, clientId, "GraphQL");
     }
 
     @MutationMapping
     public EstoqueService.PurchaseResult cancel(@Argument String item, @Argument int quantity, @Argument String clientId) {
-        // Passando "GraphQL" como origem
         return estoqueService.cancelarCompra(item, quantity, clientId, "GraphQL");
     }
 
