@@ -30,10 +30,10 @@ O objetivo principal é demonstrar a interoperabilidade entre múltiplas interfa
 
 Conforme exigido nas especificações de entrega, o projeto foi containerizado e a imagem está publicada no Docker Hub:
 
-* **Usuário / Organização:** `thiagollage`
-* **Nome da Imagem:** `bcc264-tp2`
+* **Usuário / Organização:** `arthurmendestorres`
+* **Nome da Imagem:** `bcc264-tp3`
 * **Tag da Submissão:** `latest`
-* **Link direto:** `docker.io/thiagollage/bcc264-tp2:latest`
+* **Link direto:** `https://hub.docker.com/r/arthurmendestorres/bcc264-tp3`
 
 ---
 
@@ -64,7 +64,7 @@ O servidor estará escutando nas seguintes portas:
 (Opcional) A imagem também está disponível publicamente no Docker Hub e pode ser executada com:
 
 ```bash
-docker run -p 8080:8080 -p 50051:50051 <SEU_USUARIO_DOCKERHUB>/bcc264-tp3:latest
+docker run -p 8080:8080 -p 50051:50051 arthurmendestorres/bcc264-tp3:latest
 ```
 
 ## 🧪 Como Testar as Interfaces
