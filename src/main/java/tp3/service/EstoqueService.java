@@ -10,7 +10,7 @@ import java.util.Map;
 public class EstoqueService {
 
     private final Map<String, Integer> estoque = new ConcurrentHashMap<>();
-    private final EstoqueWebSocketHandler webSocketHandler; // <- Injetado aqui!
+    private final EstoqueWebSocketHandler webSocketHandler; 
 
     public EstoqueService(EstoqueWebSocketHandler webSocketHandler) {
         this.webSocketHandler = webSocketHandler;

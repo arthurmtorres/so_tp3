@@ -23,7 +23,7 @@ Content-Type: application/json
 
 ### 5. Cancelar/Devolver via REST
 POST http://localhost:8080/cancel
-Content-Type: application/json
+Content-Type: application/jsonA
 
 {
   "item": "monitor",
@@ -112,6 +112,9 @@ WEBSOCKET ws://127.0.0.1:8080/ws
 ### =====================================
 ### REST
 ### =====================================
+
+### Verificar se o servidor está de pé
+curl -s -X GET http://localhost:8080/health
 
 ### Listar todos os itens
 curl -s -X GET http://localhost:8080/items

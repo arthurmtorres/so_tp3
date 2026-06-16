@@ -17,7 +17,6 @@ public class WebSocketConfig implements WebSocketConfigurer {
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        // Expõe o endpoint na URL: ws://localhost:8080/ws/estoque
         registry.addHandler(webSocketHandler, "/ws/estoque").setAllowedOrigins("*");
     }
 }
