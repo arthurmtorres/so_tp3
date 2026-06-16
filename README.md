@@ -73,7 +73,9 @@ Na raiz do projeto, há um arquivo chamado testes.http. Se você estiver utiliza
 
 Caso não tenha essa extensão, basta digitar os seguintes comandos no terminal para usar as interfaces.
 
+
 1. REST
+
 
 - Verificar se o servidor está de pé
 ```bash
@@ -100,7 +102,9 @@ curl -s -X POST http://localhost:8080/purchase -H "Content-Type: application/jso
 curl -s -X POST http://localhost:8080/cancel -H "Content-Type: application/json" -d '{"item": "monitor", "quantity": 1, "clientId": "cli-01"}'
 ```
 
+
 2. GraphQL
+
 
 - Listar todos os itens
 ```bash
@@ -122,7 +126,9 @@ curl -s -X POST http://localhost:8080/graphql -H "Content-Type: application/json
 curl -s -X POST http://localhost:8080/graphql -H "Content-Type: application/json" -d '{"query": "mutation { cancel(item: \"monitor\", quantity: 1, clientId: \"cli-01\") }"}'
 ```
 
+
 3. gRPC
+
 
 - Listar todos os itens
 ```bash
@@ -144,7 +150,9 @@ grpcurl -plaintext -d '{"item": "monitor", "quantity": 1, "clientId": "cli-grpc"
 grpcurl -plaintext -d '{"item": "monitor", "quantity": 1, "clientId": "cli-grpc"}' localhost:9090 inventory.InventoryService/Cancel
 ```
 
+
 4. WebSocket
+
 
 - Conectar para escutar eventos em tempo real
 ```bash
