@@ -17,7 +17,7 @@ Content-Type: application/json
 
 {
   "item": "monitor",
-  "quantity": 2,
+  "quantity": 1,
   "clientId": "cli-rest-01"
 }
 
@@ -149,16 +149,16 @@ curl -s -X POST http://localhost:8080/graphql -H "Content-Type: application/json
 ### =====================================
 
 ### Listar todos os itens
-grpcurl -plaintext localhost:9090 inventory.InventoryService/ListItems
+grpcurl -plaintext localhost:50051 inventory.InventoryService/ListItems
 
 ### Consultar item específico
-grpcurl -plaintext -d '{"id": "monitor"}' localhost:9090 inventory.InventoryService/GetItem
+grpcurl -plaintext -d '{"id": "monitor"}' localhost:50051 inventory.InventoryService/GetItem
 
 ### Comprar item
-grpcurl -plaintext -d '{"item": "monitor", "quantity": 1, "clientId": "cli-grpc"}' localhost:9090 inventory.InventoryService/Purchase
+grpcurl -plaintext -d '{"item": "monitor", "quantity": 1, "clientId": "cli-grpc"}' localhost:50051 inventory.InventoryService/Purchase
 
 ### Cancelar compra
-grpcurl -plaintext -d '{"item": "monitor", "quantity": 1, "clientId": "cli-grpc"}' localhost:9090 inventory.InventoryService/Cancel
+grpcurl -plaintext -d '{"item": "monitor", "quantity": 1, "clientId": "cli-grpc"}' localhost:50051 inventory.InventoryService/Cancel
 
 ### =====================================
 ### WEBSOCKET

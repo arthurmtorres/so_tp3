@@ -132,22 +132,22 @@ curl -s -X POST http://localhost:8080/graphql -H "Content-Type: application/json
 
 - Listar todos os itens
 ```bash
-grpcurl -plaintext localhost:9090 inventory.InventoryService/ListItems
+grpcurl -plaintext localhost:50051 inventory.InventoryService/ListItems
 ```
 
 - Consultar item específico
 ```bash
-grpcurl -plaintext -d '{"id": "monitor"}' localhost:9090 inventory.InventoryService/GetItem
+grpcurl -plaintext -d '{"id": "monitor"}' localhost:50051 inventory.InventoryService/GetItem
 ```
 
 - Comprar item
 ```bash
-grpcurl -plaintext -d '{"item": "monitor", "quantity": 1, "clientId": "cli-grpc"}' localhost:9090 inventory.InventoryService/Purchase
+grpcurl -plaintext -d '{"item": "monitor", "quantity": 1, "clientId": "cli-grpc"}' localhost:50051 inventory.InventoryService/Purchase
 ```
 
 - Cancelar compra
 ```bash
-grpcurl -plaintext -d '{"item": "monitor", "quantity": 1, "clientId": "cli-grpc"}' localhost:9090 inventory.InventoryService/Cancel
+grpcurl -plaintext -d '{"item": "monitor", "quantity": 1, "clientId": "cli-grpc"}' localhost:50051 inventory.InventoryService/Cancel
 ```
 
 
