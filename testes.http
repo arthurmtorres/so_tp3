@@ -16,7 +16,7 @@ POST http://localhost:8080/purchase
 Content-Type: application/json
 
 {
-  "item": "monitor",
+  "item": "mesa",
   "quantity": 1,
   "clientId": "cli-rest-01"
 }
@@ -57,7 +57,7 @@ POST http://localhost:8080/graphql
 Content-Type: application/json
 
 {
-  "query": "mutation { purchase(item: \"monitor\", quantity: 1, clientId: \"cli-gql-01\") { success remaining } }"
+  "query": "mutation { purchase(item: \"mesa\", quantity: 1, clientId: \"cli-gql-01\") { success remaining } }"
 }
 
 ### 9. Cancelar compra via Mutation
@@ -73,10 +73,10 @@ Content-Type: application/json
 ### =====================================
 
 ### gRPC: Rota 1 - Listar todos os itens
-GRPC localhost:9090/inventory.InventoryService/ListItems
+GRPC localhost:50051/inventory.InventoryService/ListItems
 
 ### gRPC: Rota 2 - Comprar (Exemplo: comprando 1 mesa)
-GRPC localhost:9090/inventory.InventoryService/Purchase
+GRPC localhost:50051/inventory.InventoryService/Purchase
 
 {
   "item": "mesa",
@@ -85,14 +85,14 @@ GRPC localhost:9090/inventory.InventoryService/Purchase
 }
 
 ### gRPC: Rota 3 - Consultar a quantidade de um item específico
-GRPC localhost:9090/inventory.InventoryService/GetItem
+GRPC localhost:50051/inventory.InventoryService/GetItem
 
 {
   "id": "monitor"
 }
 
 ### gRPC: Rota 4 - Cancelar / Devolver item ao estoque
-GRPC localhost:9090/inventory.InventoryService/Cancel
+GRPC localhost:50051/inventory.InventoryService/Cancel
 
 {
   "item": "monitor",
@@ -155,7 +155,7 @@ grpcurl -plaintext localhost:50051 inventory.InventoryService/ListItems
 grpcurl -plaintext -d '{"id": "monitor"}' localhost:50051 inventory.InventoryService/GetItem
 
 ### Comprar item
-grpcurl -plaintext -d '{"item": "monitor", "quantity": 1, "clientId": "cli-grpc"}' localhost:50051 inventory.InventoryService/Purchase
+grpcurl -plaintext -d '{"item": "cadeira", "quantity": 1, "clientId": "cli-grpc"}' localhost:50051 inventory.InventoryService/Purchase
 
 ### Cancelar compra
 grpcurl -plaintext -d '{"item": "monitor", "quantity": 1, "clientId": "cli-grpc"}' localhost:50051 inventory.InventoryService/Cancel
